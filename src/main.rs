@@ -1,4 +1,4 @@
-use iced::{ button, executor, text_input, Align, Application, Button, Clipboard, Column, Command, Container, Element, Length, HorizontalAlignment, Row, Settings, Text, TextInput };
+use iced::{ button, executor, Align, Application, Button, Clipboard, Column, Command, Container, Element, Length, HorizontalAlignment, Row, Settings, Text };
 
 
 pub fn main() -> iced::Result {
@@ -6,6 +6,10 @@ pub fn main() -> iced::Result {
 }
 
 struct Calculator {
+    x: String,
+    y: String,
+    operation: String,
+    result: f64,
     state: State,
     key_1: button::State,
     key_2: button::State,
@@ -33,12 +37,23 @@ enum State {
 
 #[derive(Debug, Clone)]
 enum Message {
-    Number,
+    Number1,
+    Number2,
+    Number3,
+    Number4,
+    Number5,
+    Number6,
+    Number7,
+    Number8,
+    Number9,
+    Number0,
     Add,
     Sub,
     Multiply,
     Divide,
     Solve,
+    Clear,
+    Decimal
 }
 
 impl Application for Calculator {
@@ -51,6 +66,10 @@ impl Application for Calculator {
         (
             Calculator {
                 state: State::Input1,
+                x: String::from(""),
+                y: String::from(""),
+                operation: String::from(""),
+                result: 0.0,
                 key_1: button::State::new(),
                 key_2: button::State::new(),
                 key_3: button::State::new(),
@@ -77,28 +96,135 @@ impl Application for Calculator {
         String::from("Rusty Icy Calculator")
     }
 
-    fn update(&mut self, message: Message, clipboard: &mut Clipboard) -> Command<Message> {
-        match message {
-            Message::Number => match self.state {
-                State::Input1 => {
+    fn update(&mut self, message: Message, _clipboard: &mut Clipboard) -> Command<Message> {
 
+        match message {
+            Message::Number1 => match self.state {
+                State::Input1 => {
+                    self.x.push_str("1");
+                    println!("Num1 is {}", self.x);
                 }
                 State::Input2 => {
-
+                    self.y.push_str("1");
+                    println!("Num2 is {}", self.y);
                 }
             }
-            Message::Add => match &mut self.state {
-                State::Input1 => {
 
+            Message::Number2 => match self.state {
+                State::Input1 => {
+                    self.x.push_str("2");
+                    println!("Num1 is {}", self.x);
                 }
                 State::Input2 => {
+                    self.y.push_str("2");
+                    println!("Num2 is {}", self.y);
+                }
+            }
 
+            Message::Number3 => match self.state {
+                State::Input1 => {
+                    self.x.push_str("3");
+                    println!("Num1 is {}", self.x);
+                }
+                State::Input2 => {
+                    self.y.push_str("3");
+                    println!("Num2 is {}", self.y);
+                }
+            }
+
+            Message::Number4 => match self.state {
+                State::Input1 => {
+                    self.x.push_str("4");
+                    println!("Num1 is {}", self.x);
+                }
+                State::Input2 => {
+                    self.y.push_str("4");
+                    println!("Num2 is {}", self.y);
+                }
+            }
+
+            Message::Number5 => match self.state {
+                State::Input1 => {
+                    self.x.push_str("5");
+                    println!("Num1 is {}", self.x);
+                }
+                State::Input2 => {
+                    self.y.push_str("5");
+                    println!("Num2 is {}", self.y);
+                }
+            }
+
+            Message::Number6 => match self.state {
+                State::Input1 => {
+                    self.x.push_str("6");
+                    println!("Num1 is {}", self.x);
+                }
+                State::Input2 => {
+                    self.y.push_str("6");
+                    println!("Num2 is {}", self.y);
+                }
+            }
+
+            Message::Number7 => match self.state {
+                State::Input1 => {
+                    self.x.push_str("7");
+                    println!("Num1 is {}", self.x);
+                }
+                State::Input2 => {
+                    self.y.push_str("7");
+                    println!("Num2 is {}", self.y);
+                }
+            }
+
+            Message::Number8 => match self.state {
+                State::Input1 => {
+                    self.x.push_str("8");
+                    println!("Num1 is {}", self.x);
+                }
+                State::Input2 => {
+                    self.y.push_str("8");
+                    println!("Num2 is {}", self.y);
+                }
+            }
+
+            Message::Number9 => match self.state {
+                State::Input1 => {
+                    self.x.push_str("9");
+                    println!("Num1 is {}", self.x);
+                }
+                State::Input2 => {
+                    self.y.push_str("9");
+                    println!("Num2 is {}", self.y);
+                }
+            }
+
+            Message::Number0 => match self.state {
+                State::Input1 => {
+                    self.x.push_str("0");
+                    println!("Num1 is {}", self.x);
+                }
+                State::Input2 => {
+                    self.y.push_str("0");
+                    println!("Num2 is {}", self.y);
+                }
+            }
+
+            Message::Add => match &mut self.state {
+                State::Input1 => {
+                    self.operation = String::from("+");
+                    self.state = State::Input2;
+                    println!("{}", self.operation);
+                }
+                State::Input2 => {
+                    
                 }
             }
 
             Message::Sub => match &mut self.state {
                 State::Input1 => {
-
+                    self.operation = String::from("-");
+                    self.state = State::Input2;
+                    println!("{}", self.operation);
                 }
                 State::Input2 => {
 
@@ -107,7 +233,9 @@ impl Application for Calculator {
 
             Message::Multiply => match &mut self.state {
                 State::Input1 => {
-
+                    self.operation = String::from("*");
+                    self.state = State::Input2;
+                    println!("{}", self.operation);
                 }
                 State::Input2 => {
 
@@ -116,7 +244,9 @@ impl Application for Calculator {
 
             Message::Divide => match &mut self.state {
                 State::Input1 => {
-
+                    self.operation = String::from("/");
+                    self.state = State::Input2;
+                    println!("{}", self.operation);
                 }
                 State::Input2 => {
 
@@ -124,6 +254,44 @@ impl Application for Calculator {
             }
 
             Message::Solve => match &mut self.state {
+                State::Input1 => {
+                    self.result = self.x.parse().unwrap();
+                    println!("Result: {}", self.result);
+                }
+                State::Input2 => {
+                    let x: f64 = self.x.parse().unwrap();
+                    let y: f64 = self.y.parse().unwrap();
+
+                    if self.operation == "+" {
+                        self.result = x + y;
+                    }
+                    else if self.operation == "-" {
+                        self.result = x - y;
+                    }
+                    else if self.operation == "*" {
+                        self.result = x * y;
+                    }
+                    else if self.operation == "/" {
+                        self.result = x / y;
+                    }
+                    println!("Result: {}", self.result);
+                    self.x = String::from("");
+                    self.y = String::from("");
+                    self.operation = String::from("");
+                    self.state = State::Input1;
+                }
+            }
+
+            Message::Clear => match &mut self.state {
+                State::Input1 => {
+
+                }
+                State::Input2 => {
+
+                }
+            }
+
+            Message::Decimal => match &mut self.state {
                 State::Input1 => {
 
                 }
@@ -138,22 +306,6 @@ impl Application for Calculator {
     }
 
     fn view(&mut self) -> Element<Message> {
-        //Text::new("Hello, World!").into()
-
-        let op = Operation {
-            x: 0,
-            y: 0,
-            res: 0
-        };
-
-        /*
-        let display = TextInput::new(
-
-        )
-        .padding(15)
-        .size(30);
-        */
-        
         let key = |state, label, style| {
             Button::new(
                 state,
@@ -165,55 +317,55 @@ impl Application for Calculator {
         };
 
         let key_1 = key(&mut self.key_1, "1", style::Button::Primary)
-            .on_press(Message::Number);
+            .on_press(Message::Number1);
 
         let key_2 = key(&mut self.key_2, "2", style::Button::Primary)
-            .on_press(Message::Number);
+            .on_press(Message::Number2);
 
         let key_3 = key(&mut self.key_3, "3", style::Button::Primary)
-            .on_press(Message::Number);
+            .on_press(Message::Number3);
 
         let key_4 = key(&mut self.key_4, "4", style::Button::Primary)
-            .on_press(Message::Number);
+            .on_press(Message::Number4);
 
         let key_5 = key(&mut self.key_5, "5", style::Button::Primary)
-            .on_press(Message::Number);
+            .on_press(Message::Number5);
 
         let key_6 = key(&mut self.key_6, "6", style::Button::Primary)
-            .on_press(Message::Number);
+            .on_press(Message::Number6);
 
         let key_7 = key(&mut self.key_7, "7", style::Button::Primary)
-            .on_press(Message::Number);
+            .on_press(Message::Number7);
 
         let key_8 = key(&mut self.key_8, "8", style::Button::Primary)
-            .on_press(Message::Number);
+            .on_press(Message::Number8);
 
         let key_9 = key(&mut self.key_9, "9", style::Button::Primary)
-            .on_press(Message::Number);
+            .on_press(Message::Number9);
 
         let key_0 = key(&mut self.key_0, "0", style::Button::Primary)
-            .on_press(Message::Number);
+            .on_press(Message::Number0);
         
         let key_decimal = key(&mut self.key_decimal, ".", style::Button::Primary)
-            .on_press(Message::Number);
+            .on_press(Message::Decimal);
 
         let key_equal = key(&mut self.key_equal, "=", style::Button::Primary)
-            .on_press(Message::Number);
+            .on_press(Message::Solve);
 
         let key_clear = key(&mut self.key_clear, "CL", style::Button::Secondary)
-            .on_press(Message::Number);
+            .on_press(Message::Clear);
 
         let key_div = key(&mut self.key_div, "/", style::Button::Secondary)
-            .on_press(Message::Number);
+            .on_press(Message::Divide);
 
         let key_mul = key(&mut self.key_mul, "x", style::Button::Secondary)
-            .on_press(Message::Number);
+            .on_press(Message::Multiply);
 
         let key_sub = key(&mut self.key_sub, "-", style::Button::Secondary)
-            .on_press(Message::Number);
+            .on_press(Message::Sub);
             
         let key_add = key(&mut self.key_add, "+", style::Button::Secondary)
-            .on_press(Message::Number);
+            .on_press(Message::Add);
 
         let keypad_row_1 = Row::new()
             .spacing(20)
@@ -285,9 +437,11 @@ mod style {
     }
 }
 
+#[derive(Debug, Clone)]
 struct Operation {
     x: i64,
     y: i64,
+    op: String,
     res: i64, 
 }
 
